@@ -2,8 +2,30 @@
 
 <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
 
+p：<%=@jsdh_p%><br />
+g：<%=@jsdh_g%><br />
 
+<div id="status">
+	Wating...
+</div>
 
 <script>
+
+var prime_url = "<%=url_for :action=>:jsdh_prime%>";
+var key_url =  "<%=url_for :action=>:jsdh_set_key%>";
+
+var jsdh = new JSDH();
+jsdh.init({
+	prime_url : prime_url,
+	onSuccess : function(key){
+		$('#status').html('Finish. Key:' + key);
+	},
+	onShake : function(progress){
+		$('#status').html('Shake...' + progress + '%');
+	},
+	onFailed : function(){
+		alert('Init Failed!');
+	}
+});
 
 </script>
