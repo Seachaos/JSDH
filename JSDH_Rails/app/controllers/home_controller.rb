@@ -22,7 +22,7 @@ class HomeController < ApplicationController
 			:bb => session[:jsdh_bb],
 			:p => session[:jsdh_p],
 			:g => session[:jsdh_g],
-			:table => Prime.take(10**5)
+			:table => Prime.take(20)
 		}
 	end
 
@@ -45,19 +45,19 @@ protected
 
 	def jsdh_set_key
 		aa = params[:caa].to_i
-		return false if aa < 10
+		# return false if aa < 10
 		key = ( aa ** session[:jsdh_b] ) % session[:jsdh_p]
 		session[:jsdh_key] = session[:jsdh_key] + key.to_s + 'x';
 	end
 
 	def rand_prime
-		prime = Prime.take(1000)
-		offset = 300
+		prime = Prime.take(20)
+		offset = 2
 		offset = offset + (rand * (prime.length - offset )).to_i - 2
 		prime[offset]
 	end
 
 	def rand_number
-		(rand * 1E6).to_i
+		(rand * 5).to_i + 5
 	end
 end

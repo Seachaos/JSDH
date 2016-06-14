@@ -46,25 +46,26 @@ JSDH.prototype.shakeHand = function(){
 		data: { caa : me.aa, finish: me.finish },
 		dataType: 'json',
 		success: function(data){
-			data.g = new BigNumber(data.g);
-			data.p = new BigNumber(data.p);
-			data.bb = new BigNumber(data.bb);
-
-			var offset = 70;
-			offset = (data.table.length - offset) * Math.random() + offset;
-			offset = parseInt(offset / 6);
-			var a = data.table[offset];
-			a = new BigNumber(a);
-			var aa = data.g.toPower(a).mod(data.p);
-			if(aa<10){
-				me.aa = 'none';
-				me.shakeHand();
-				return;
-			}
 			if(me.finish){
 				me.successCallback(me.key);
 				return;
 			}
+			data.g = new BigNumber(data.g);
+			data.p = new BigNumber(data.p);
+			data.bb = new BigNumber(data.bb);
+
+			var offset = 1;
+			offset = (data.table.length - offset) * Math.random() + offset;
+			offset = parseInt(offset);
+			console.log(offset);
+			var a = data.table[offset];
+			a = new BigNumber(a);
+			var aa = data.g.toPower(a).mod(data.p);
+			// if(aa<10){
+				// me.aa = 'none';
+				// me.shakeHand();
+				// return;
+			// }
 			var key = data.bb.toPower(a).mod(data.p);
 			me.key += key.toString() + 'x';
 			me.aa = aa.toString();
