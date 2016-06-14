@@ -26,7 +26,7 @@ SOFTWARE.
 
 
 function JSDH(){
-	this.shakeTimes = parseInt(Math.random() * 3) + 3;
+	this.shakeTimes = parseInt(Math.random() * 5) + 3;
 	this.maxShakeTimes = this.shakeTimes;
 	this.key = '';
 	this.finish = false;
